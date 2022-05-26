@@ -8,14 +8,13 @@ export default function Main() {
     const [people, setPeople] = useState(null)
     const URL = "https://karc-fullstack-mern-app-be.herokuapp.com/people"
     const getPeople = async () => {
-        const response = await fetch(URL)
-        const data = await response.json()
+        const data = await fetch(URL).then(res => res.json())
         setPeople(data)
     }
 
     const createPeople = async (person) => {
         await fetch(URL, {
-            method: "PORT",
+            method: "POST",
             headers: {
                 "Content-Type": "Application/json",
             },
