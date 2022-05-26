@@ -30,8 +30,12 @@ export default function Main() {
                 <Route
                     exact
                     path="/"
-                    element={<Index people={people} createPeople={createPeople}/>}/>
-                <Route path="/people/:id" element={<Show people={people}/>}/>
+                    element={<Index people={people} createPeople={createPeople}/>}
+                />
+                <Route 
+                    path="/people/:id" 
+                    element={<Show people={people}/>}
+                />
             </Routes>
         </main>
     )
