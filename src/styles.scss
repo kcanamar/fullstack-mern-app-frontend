@@ -44,10 +44,6 @@ div {
       padding: 10px;
       font-size: 1.1em;
       margin: 10px;
-
-      &[type="submit"]:hover {
-        @include black-text-white-bg;
-      }
     }
   }
 }
