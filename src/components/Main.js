@@ -6,7 +6,7 @@ import Show from "../pages/Show"
 export default function Main() {
 
     const [people, setPeople] = useState(null)
-    const URL = "https://karc-fullstack-mern-app-be.herokuapp.com/people"
+    const URL = "https://karc-fullstack-mern-app-be.herokuapp.com/people/"
     const getPeople = async () => {
         const data = await fetch(URL).then(res => res.json())
         setPeople(data)
@@ -23,6 +23,23 @@ export default function Main() {
         getPeople()
     }
 
+    const updatePeople = async (person, id) => {
+        await fetch(URL + id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "Application/json",
+            },
+            body: JSON.stringify(person)
+        })
+        getPeople()
+    }
+
+    const deletePeople = async (id) => {
+        await fetch(URL + id, {
+            method: "DELETE",
+        })
+        getPeople()
+    }
     useEffect(() => {getPeople()}, [people])
     return (
         <main>
@@ -30,11 +47,22 @@ export default function Main() {
                 <Route
                     exact
                     path="/"
-                    element={<Index people={people} createPeople={createPeople}/>}
+                    element={
+                        <Index 
+                            people={people} 
+                            createPeople={createPeople}
+                        />
+                    }
                 />
                 <Route 
                     path="/people/:id" 
-                    element={<Show people={people}/>}
+                    element={
+                        <Show 
+                            people={people}
+                            updatePeople={updatePeople}
+                            deletePeople={deletePeople}
+                        />
+                    }
                 />
             </Routes>
         </main>
